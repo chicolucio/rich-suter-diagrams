@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+import argparse
+
 
 def _3d_series_electrons():
     df = pd.read_csv("data/rich3d.csv")
@@ -181,3 +183,21 @@ def rich_suter_plot(series, save=False):
         fig.savefig(figname, bbox_inches='tight', dpi=300)
 
     plt.show()
+
+
+def _clielement():
+    """
+    CLI for rich_suter
+    """
+
+    parser = argparse.ArgumentParser(prog='Rich-Suter diagram plotter')
+    parser.add_argument('series', help='Transition series: 3d, 4d or 5d')
+    parser.add_argument('-s', '--save', action='store_true',
+                        help='Saves figure in current folder')
+    args = parser.parse_args()
+
+    rich_suter_plot(args.series, save=args.save)
+
+
+if __name__ == "__main__":
+    _clielement()
