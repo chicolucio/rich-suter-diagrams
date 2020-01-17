@@ -6,6 +6,16 @@ import argparse
 
 
 def _3d_series_electrons():
+    """Returns first transition period / 3d series data: curves points,
+    elements symbol, Z range, principal quantum number, annotation coordinates.
+
+    Returns
+    -------
+    tuple
+        curves points, elements symbol, Z range (min and max), principal
+        quantum number, annotation coordinates.
+    """
+
     df = pd.read_csv("data/rich3d.csv")
     elements = ['Sc', 'Ti', 'V', 'Cr', 'Mn', 'Fe', 'Co', 'Ni', 'Cu', 'Zn']
     Zmin = 21
@@ -31,11 +41,22 @@ def _3d_series_electrons():
                     ['', 24, 0.66], ['', 25, 0.59], ['1', 26, 0.53],
                     ['2', 27, 0.46], ['3', 28, 0.41], ['5', 29, 0.30],
                     ['5', 30, 0.25]]
+
     return (df, elements, Zmin, Zmax, N, electrons_sa, electrons_sb,
             electrons_da, electrons_db)
 
 
 def _4d_series_electrons():
+    """Returns second transition period / 4d series data: curves points,
+    elements symbol, Z range, principal quantum number, annotation coordinates.
+
+    Returns
+    -------
+    tuple
+        curves points, elements symbol, Z range (min and max), principal
+        quantum number, annotation coordinates.
+    """
+
     df = pd.read_csv("data/rich4d.csv")
     elements = ['Y', 'Zr', 'Nb', 'Mo', 'Tc', 'Ru', 'Rh', 'Pd', 'Ag', 'Cd']
     Zmin = 39
@@ -67,6 +88,16 @@ def _4d_series_electrons():
 
 
 def _5d_series_electrons():
+    """Returns third transition period / 5d series data: curves points,
+    elements symbol, Z range, principal quantum number, annotation coordinates.
+
+    Returns
+    -------
+    tuple
+        curves points, elements symbol, Z range (min and max), principal
+        quantum number, annotation coordinates.
+    """
+
     df = pd.read_csv("data/rich5d.csv")
     elements = ['Lu', 'Hf', 'Ta', 'W', 'Re', 'Os', 'Ir', 'Pt', 'Au', 'Hg']
     Zmin = 71
@@ -98,6 +129,20 @@ def _5d_series_electrons():
 
 
 def _plot_params(Zmin, Zmax):
+    """Plot parameters (grid, labels, ticks).
+
+    Parameters
+    ----------
+    Zmin : float
+        Atomic number of the first element of the series
+    Zmax : float
+        Atomic number of the last element of the series
+
+    Returns
+    -------
+    Matplotlib objects
+        Fig and ax
+    """
 
     fig, axarr = plt.subplots(figsize=(14, 10), nrows=1, ncols=1)
     ax = axarr
@@ -119,6 +164,20 @@ def _plot_params(Zmin, Zmax):
 
 
 def rich_suter_plot(series, save=False):
+    """Plots Rich and Suter diagrams.
+
+    Parameters
+    ----------
+    series : string
+        3d, 4d or 5d
+    save : bool, optional
+        Option to save the diagram in the current folder, by default False
+
+    Raises
+    ------
+    ValueError
+        If the series is not in ['3d', '4d' or '5d']
+    """
 
     if series == '3d':
         series_data = _3d_series_electrons()
