@@ -83,4 +83,4 @@ If you use this project in a scientific publication or in classes,
 please consider citing as
 
 F. L. S. Bustamante, *Rich and Suter diagrams with python*, 2019 -
-Available at:
+Available at: https://github.com/chicolucio/rich-suter-diagrams
